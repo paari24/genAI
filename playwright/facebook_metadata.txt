@@ -1,0 +1,8 @@
+name=None, property=None, content=None
+name=referrer, property=None, content=origin-when-crossorigin
+name=bingbot, property=None, content=noarchive
+name=None, property=og:site_name, content=Facebook
+name=None, property=og:url, content=https://www.facebook.com/
+name=None, property=og:image, content=https://www.facebook.com/images/fb_icon_325x325.png
+name=None, property=og:locale, content=ta_IN
+name=description, property=None, content=உங்கள் நண்பர்கள், குடும்பத்தினர் மற்றும் உங்களுக்குத் தெரிந்தவர்களுடன் இணைந்திருக்கவும், கருத்துக்களைப் பகிர்ந்துகொள்ள துவங்கவும், Facebook இல் உள்நுழையவும்
