@@ -137,78 +137,78 @@ Smallest planet in the solar system? → _______
 **Template:** Create poetry with specific parameters
 Write a poem in [style/poetic form] about [theme].
 **Example:**
-Write a poem in romantic style about pig.
+> Write a poem in romantic style about pig.
 
 ### 22. Dialogue Writing
 Write a realistic dialogue between [Person A] and [Person B] discussing [topic].
 **Example:**
-Write a realistic dialogue between Modi and Putin discussing about Mutton Biriyani.
+> Write a realistic dialogue between Modi and Putin discussing about Mutton Biriyani.
 
 ## H. Code & Technical Prompts
 
 ### 23. Code Generation
 Write a [language] function that [does something].
 **Example:**
-Write a C# function to calculate bmi.
+> Write a C# function to calculate bmi.
 
 ### 24. Debugging Help
 Here is some code. Find and fix any errors:
 **Example:**
-a=1;
-b=1;
-c+=a+b;
-read(c);
+> a=1;
+> b=1;
+> c+=a+b;
+> read(c);
 
 ### 25. API Documentation
 Explain how to use the [API name] with an example request and response.
 **Example:**
-Explain how to use the whatsapp aoi with an example request and response.
+> Explain how to use the whatsapp aoi with an example request and response.
 
 ## I. Marketing & Business Prompts
 
 ### 26. Ad Copywriting
 Write a compelling ad for [product/service] targeting [audience].
 **Example:**
-Write a compelling ad for curd targeting all age.
+> Write a compelling ad for curd targeting all age.
 
 ### 27. Product Description
 Write a persuasive product description for [product name].
 **Example:**
-Write a persuasive product description for Paari Soap.
+> Write a persuasive product description for Paari Soap.
 
 ### 28. Social Media Post
 Create a social media post promoting [event/product/idea] in a friendly tone.
 **Example:**
-Create a social media post promoting small foof kiosk only for idly and dosa in a friendly tone.
+> Create a social media post promoting small foof kiosk only for idly and dosa in a friendly tone.
 
 ## J. Customer Support & Service Prompts
 
 ### 29. Response to Complaint
 Respond professionally to this customer complaint: [Customer message here]
 **Example:**
-Respond professionally to this customer complaint: yAct internet connection is very slow always
+> Respond professionally to this customer complaint: yAct internet connection is very slow always
 
 ### 30. FAQ Generator
 Generate 5 common FAQs and answers for [topic/product]
 **Example:**
-Generate 5 common FAQs and answers for food delivey app payment
+> Generate 5 common FAQs and answers for food delivey app payment
 
 ## K. Education & Tutoring Prompts
 
 ### 31. Lesson Plan Creation
 Create a lesson plan for teaching [topic] to [grade level].
 **Example:**
-Create a lesson plan for teaching algebra to LKG in rhymes.
+> Create a lesson plan for teaching algebra to LKG in rhymes.
 
 ### 32. Quiz Generation
 Generate a 5-question quiz about [subject/topic].
 **Example:**
-Generate a 5-question quiz about spaces.
+> Generate a 5-question quiz about spaces.
 
 ### 33. Homework Help
 Explain how to solve this [math/science] problem:
 **Example:**
-A train crosses a platform 100 m long in 60 seconds at a speed of 45 km / hr. The time taken by the train to cross an electric pole is:
+> A train crosses a platform 100 m long in 60 seconds at a speed of 45 km / hr. The time taken by the train to cross an > > electric pole is:
 
 ### L. Advanced Framework-Based Templates
 
@@ -218,11 +218,11 @@ Action: [model takes an action]
 Observation: [result of the action]
 Answer: [final answer]
 **Example:**
-who discovered newton 1st law?
-Thought: I want to know who discovered newton first law, it is a gk question
-Action: search my knowledge who discovers light
-Observation: newton 1st law discovered by newton
-Answer: newton 1st law discovered by newton
+> who discovered newton 1st law?
+> Thought: I want to know who discovered newton first law, it is a gk question
+> Action: search my knowledge who discovers light
+> Observation: newton 1st law discovered by newton
+> Answer: newton 1st law discovered by newton
 
 Simulate agent behavior manually.
 
