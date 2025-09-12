@@ -139,19 +139,19 @@ Write a poem in [style/poetic form] about [theme].
 **Example:**
 Write a poem in romantic style about pig.
 
-22. Dialogue Writing
+### 22. Dialogue Writing
 Write a realistic dialogue between [Person A] and [Person B] discussing [topic].
 **Example:**
 Write a realistic dialogue between Modi and Putin discussing about Mutton Biriyani.
 
-H. Code & Technical Prompts
+## H. Code & Technical Prompts
 
-23. Code Generation
+### 23. Code Generation
 Write a [language] function that [does something].
 **Example:**
 Write a C# function to calculate bmi.
 
-24. Debugging Help
+### 24. Debugging Help
 Here is some code. Find and fix any errors:
 **Example:**
 a=1;
@@ -159,60 +159,60 @@ b=1;
 c+=a+b;
 read(c);
 
-25. API Documentation
+### 25. API Documentation
 Explain how to use the [API name] with an example request and response.
 **Example:**
 Explain how to use the whatsapp aoi with an example request and response.
 
-I. Marketing & Business Prompts
+## I. Marketing & Business Prompts
 
-26. Ad Copywriting
+### 26. Ad Copywriting
 Write a compelling ad for [product/service] targeting [audience].
 **Example:**
 Write a compelling ad for curd targeting all age.
 
-27. Product Description
+### 27. Product Description
 Write a persuasive product description for [product name].
 **Example:**
 Write a persuasive product description for Paari Soap.
 
-28. Social Media Post
+### 28. Social Media Post
 Create a social media post promoting [event/product/idea] in a friendly tone.
 **Example:**
 Create a social media post promoting small foof kiosk only for idly and dosa in a friendly tone.
 
-J. Customer Support & Service Prompts
+## J. Customer Support & Service Prompts
 
-29. Response to Complaint
+### 29. Response to Complaint
 Respond professionally to this customer complaint: [Customer message here]
 **Example:**
 Respond professionally to this customer complaint: yAct internet connection is very slow always
 
-30. FAQ Generator
+### 30. FAQ Generator
 Generate 5 common FAQs and answers for [topic/product]
 **Example:**
 Generate 5 common FAQs and answers for food delivey app payment
 
-K. Education & Tutoring Prompts
+## K. Education & Tutoring Prompts
 
-31. Lesson Plan Creation
+### 31. Lesson Plan Creation
 Create a lesson plan for teaching [topic] to [grade level].
 **Example:**
 Create a lesson plan for teaching algebra to LKG in rhymes.
 
-32. Quiz Generation
+### 32. Quiz Generation
 Generate a 5-question quiz about [subject/topic].
 **Example:**
 Generate a 5-question quiz about spaces.
 
-33. Homework Help
+### 33. Homework Help
 Explain how to solve this [math/science] problem:
 **Example:**
 A train crosses a platform 100 m long in 60 seconds at a speed of 45 km / hr. The time taken by the train to cross an electric pole is:
 
-L. Advanced Framework-Based Templates
+### L. Advanced Framework-Based Templates
 
-34. ReAct Framework
+### 34. ReAct Framework
 Thought: [model thinks about what to do next]
 Action: [model takes an action]
 Observation: [result of the action]
@@ -226,7 +226,7 @@ Answer: newton 1st law discovered by newton
 
 Simulate agent behavior manually.
 
-35. Tree of Thoughts (ToT)
+### 35. Tree of Thoughts (ToT)
 Generate 3 possible solutions to [problem]. Evaluate each and choose the best one.
 **Example:**
  Sakarai pongal vadakari
@@ -235,20 +235,20 @@ Generate 3 possible solutions to [problem]. Evaluate each and choose the best on
 
  Evalution : Biriyani Pachadi
 
-36. Self-Consistency Prompting
+### 36. Self-Consistency Prompting
 Solve the following question in 3 different ways and pick the
 most consistent answer:
 **Example:**
 How to pick a best quality t shirt?
 
-M. Prompt Optimization & Evaluation
+## M. Prompt Optimization & Evaluation
 
-37. Prompt Refinement
+### 37. Prompt Refinement
 Improve this prompt: "[Original prompt]" Make it clearer, more specific, and structured.
 **Example:**
 Improve this prompt: "Consider you're a jmeter expert, How to extract values from the response header" Make it clearer, more specific, and structured.
 
-38. Prompt Grading Rubric
+### 38. Prompt Grading Rubric
 Rate this output based on the following criteria (1-5):
 Relevance:
 Accuracy:
@@ -266,59 +266,59 @@ content-type: text/html;
 Extract the value of content-type: , the value is text/html
 Give the report in detailed manner anyone can understad in tree of thoughts
 
-39. Prompt Iteration Challenge
+### 39. Prompt Iteration Challenge
 Take this weak prompt: "[Prompt]"
 Now rewrite it 3 times to improve clarity and effectiveness.
 **Example:**
 consider you're a business analyst
 
-N. Real-World Application Prompts
+## N. Real-World Application Prompts
 
-40. Job Posting Creation
+### 40. Job Posting Creation
 Write a job posting for [position] at [company]. Include responsibilities, requirements, and benefits.
 
-41. Resume Summary Builder
+### 41. Resume Summary Builder
 Create a professional summary for a resume based on the following details:
 [Experience, skills, achievements]
 
-42. Business Propcsal
+### 42. Business Propcsal
 Write a proposal for [project idea] to [client/investor]. Include objectives, methodology, and benefits
 
-O. Miscellaneous Useful Templates
+## O. Miscellaneous Useful Templates
 
-43. Opinion Writing
+### 43. Opinion Writing
 Write an opinion piece on [topic]. Use persuasive arguments and examples.
 
-44. Debate Preparation
+### 44. Debate Preparation
 Prepare arguments for both sides of the debate: "[Debate topic]"
 
-45. Travel Planning
+### 45. Travel Planning
 Plan a 5-day trip to [destination] for [type of traveler]. Include activities, budget, and tips.
 
-46. Book/Movie Review
+### 46. Book/Movie Review
 Write a review of [book/movie]. Include plot summary, strengths, weaknesses, and recommendation.
 
-47. Personal Development
+### 47. Personal Development
 Give me actionable advice on how to [goal], including daily habits and mindset shifts.
 
-P. Prompt Chaining Examples
+## P. Prompt Chaining Examples
 
-48. Multi-step Research Task
+### 48. Multi-step Research Task
 Step 1:
 Find out the top 5 causes of climate change.
 Step 2:
 Based on those causes, suggest 5 practical solutions individuals can adopt.
 
-49. Idea to Execution
+### 49. Idea to Execution
 SOCIALEAGLE AI
 Step 1:
 Generate 5 business ideas for eco-friendly products.
 Step 2:
 Pick one idea and create a marketing strategy for it.
 
-Q. Prompt Template Generator
+## Q. Prompt Template Generator
 
-50. Universal Prompt Builder
+### 50. Universal Prompt Builder
 
 [Role] + [Task] + [Context] + [Example]+ [Format]
 Example:
