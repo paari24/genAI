@@ -229,24 +229,24 @@ Simulate agent behavior manually.
 ### 35. Tree of Thoughts (ToT)
 Generate 3 possible solutions to [problem]. Evaluate each and choose the best one.
 **Example:**
- Sakarai pongal vadakari
- Payasam Karakolanambu
- Biriyani Pachadi
+> Sakarai pongal vadakari
+> Payasam Karakolanambu
+> Biriyani Pachadi
 
- Evalution : Biriyani Pachadi
+> Evalution : Biriyani Pachadi
 
 ### 36. Self-Consistency Prompting
 Solve the following question in 3 different ways and pick the
 most consistent answer:
 **Example:**
-How to pick a best quality t shirt?
+> How to pick a best quality t shirt?
 
 ## M. Prompt Optimization & Evaluation
 
 ### 37. Prompt Refinement
 Improve this prompt: "[Original prompt]" Make it clearer, more specific, and structured.
 **Example:**
-Improve this prompt: "Consider you're a jmeter expert, How to extract values from the response header" Make it clearer, more specific, and structured.
+> Improve this prompt: "Consider you're a jmeter expert, How to extract values from the response header" Make it clearer, > more specific, and structured.
 
 ### 38. Prompt Grading Rubric
 Rate this output based on the following criteria (1-5):
@@ -257,49 +257,75 @@ Fluency:
 Creativity:
 Final Score:
 **Example:**
-Consider your're a Jmeter expert.
-You need to extract the values from reponse headers
-example: 
-alt-svc :h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
-cache-control : no-cache, must-revalidate
-content-type: text/html; 
-Extract the value of content-type: , the value is text/html
-Give the report in detailed manner anyone can understad in tree of thoughts
+> Consider your're a Jmeter expert.
+> 
+> You need to extract the values from reponse headers
+> 
+> example: 
+> 
+> alt-svc :h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+> 
+> cache-control : no-cache, must-revalidate
+> 
+> content-type: text/html; 
+> 
+> Extract the value of content-type: , the value is text/html
+> 
+> Give the report in detailed manner anyone can understad in tree of thoughts
 
 ### 39. Prompt Iteration Challenge
 Take this weak prompt: "[Prompt]"
 Now rewrite it 3 times to improve clarity and effectiveness.
 **Example:**
-consider you're a business analyst
+> Take this weak prompt: "You are a skilled **Business Requirement Analysis Agent**. Your expertise is in extracting and organizing requirement details from business documents precisely and clearly."
+> 
+> Now rewrite it 3 times to improve clarity and effectiveness.
 
 ## N. Real-World Application Prompts
 
 ### 40. Job Posting Creation
 Write a job posting for [position] at [company]. Include responsibilities, requirements, and benefits.
+**Example:**
+> Write a job posting for Senior SDET at FE Fundinfo. Include responsibilities, requirements, and benefits.
 
 ### 41. Resume Summary Builder
 Create a professional summary for a resume based on the following details:
 [Experience, skills, achievements]
+**Example:**
+> Create a professional summary for a resume based on the following details:
+[9+ experience in software testing, skills: manual testing , jmeter, playwright selenium, c# , java , python, Genai, achievements: put siome achievements based on role]
 
 ### 42. Business Propcsal
 Write a proposal for [project idea] to [client/investor]. Include objectives, methodology, and benefits
+**Example:**
+> Write a proposal for selfhost chatbot to fundinfo. Include objectives, methodology, and benefits
 
 ## O. Miscellaneous Useful Templates
 
 ### 43. Opinion Writing
 Write an opinion piece on [topic]. Use persuasive arguments and examples.
+**Example:**
+> Write an opinion piece on Gen Z issue in nepal. Use persuasive arguments and examples.
 
 ### 44. Debate Preparation
 Prepare arguments for both sides of the debate: "[Debate topic]"
+**Example:**
+> Prepare arguments for both sides of the debate: "Who is best in home men or women"
 
 ### 45. Travel Planning
 Plan a 5-day trip to [destination] for [type of traveler]. Include activities, budget, and tips.
+**Example:**
+> Plan a 5-day trip to Rameswaram for me and wife in bike. Include activities, budget, and tips.
 
 ### 46. Book/Movie Review
 Write a review of [book/movie]. Include plot summary, strengths, weaknesses, and recommendation.
+**Example:**
+> Write a review of f1 movie. Include plot summary, strengths, weaknesses, and recommendation.
 
 ### 47. Personal Development
 Give me actionable advice on how to [goal], including daily habits and mindset shifts.
+**Example:**
+> Give me actionable advice on how to improve wealth, including daily habits and mindset shifts.
 
 ## P. Prompt Chaining Examples
 
@@ -308,20 +334,33 @@ Step 1:
 Find out the top 5 causes of climate change.
 Step 2:
 Based on those causes, suggest 5 practical solutions individuals can adopt.
+**Example:**
+> Step 1: 
+>
+> Find out the top 5 causes of ai change. 
+> Step 2: 
+>
+> Based on those causes, suggest 5 practical solutions individuals can adopt.
 
 ### 49. Idea to Execution
-SOCIALEAGLE AI
 Step 1:
 Generate 5 business ideas for eco-friendly products.
 Step 2:
 Pick one idea and create a marketing strategy for it.
+**Example:**
+> Step 1:
+> 
+> Generate 5 business ideas for gen z products.
+> 
+> Step 2:
+> 
+> Pick one idea and create a marketing strategy for it.
 
 ## Q. Prompt Template Generator
 
 ### 50. Universal Prompt Builder
 
 [Role] + [Task] + [Context] + [Example]+ [Format]
-Example:
-You are a nutritionist. Create a weekly meal plan for someone with diabetes. Include breakfast, lunch, dinner, and snacks. Format as a table.
-SOCIALEAGLE AI
+**Example:**
+> You are a financial expert. Create a detailed plan for saving money and wealth. Include mistakes of saving like bank saving account /FD create a prompt in the R+T+C+E+F format
 
