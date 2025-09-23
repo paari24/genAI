@@ -1,6 +1,4 @@
 
-Content is user-generated and unverified.
-21
 import requests
 import json
 
