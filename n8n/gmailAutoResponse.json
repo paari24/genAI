@@ -1,0 +1,128 @@
+{
+  "name": "gmailAutoResponse",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0e5753cd-952d-4f84-8685-99ebd4c8f296",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "qX4b8LIs14nLT93k",
+          "name": "B24_mailaccount"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=write a reply mail for the below:\nsubject:  {{ $json.Subject }}\nfrom: {{ $json.From }}\nContent: {{ $json.snippet }}\n\n"
+            },
+            {
+              "content": "You're a expert in writing professional email \n\n\n# only write the body message no subject\n# Draft the mail in good format:\ngreeting message and then new line messages and then\nfooter.\n\nStrictly use the below format spacing and new line need to be same\n\nexamples:\nHi  <name>,\n\n<message content>\n\nThanks & Regards,\nPaarib",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        224,
+        0
+      ],
+      "id": "6f10dcb7-6e8f-4dc6-af36-5d3b2151c4ec",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "1ZRXiDzT0Bz6GVBj",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "message": "={{ $json.message.content }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        576,
+        0
+      ],
+      "id": "d15f89b2-5a80-42c2-ad7b-f9c8f67faf32",
+      "name": "Reply to a message",
+      "webhookId": "12789880-48c3-4743-a11c-bcd6b752edfc",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "qX4b8LIs14nLT93k",
+          "name": "B24_mailaccount"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Reply to a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "01a5212d-6046-44fd-87ee-0945691b3c65",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "391ccf06240767a70e415db25ca1487c5b245e4a473dd0cfcdd50bf42284853d"
+  },
+  "id": "N9gxZxptaTa10jMF",
+  "tags": []
+}

@@ -1,0 +1,210 @@
+{
+  "name": "gSheetAutomation",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c7b99a3f-49de-4da7-939b-e5a8a6376f28",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1l1sX7lcwiSnjeucCzhB-2y9VVBLYj4isYNxWf6O44wQ",
+          "mode": "list",
+          "cachedResultName": "localeagledemo",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1l1sX7lcwiSnjeucCzhB-2y9VVBLYj4isYNxWf6O44wQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "review",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1l1sX7lcwiSnjeucCzhB-2y9VVBLYj4isYNxWf6O44wQ/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "e792bcd8-3161-460a-9c18-f78ffc617089",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "pQlEzrMQL0TViTXO",
+          "name": "B24_account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=identify the sentiment for the below feedback {{ $json.Review }}"
+            },
+            {
+              "content": "you're expert in analyzing the feedback and identifying the sentiment.\n\nyou should give output only in\npositive\nneutral\nnegative\n\n#output should be in one word\nex: \"positive\"",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        448,
+        0
+      ],
+      "id": "a287a993-1d92-4465-9006-a1d1088fd804",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "1ZRXiDzT0Bz6GVBj",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1l1sX7lcwiSnjeucCzhB-2y9VVBLYj4isYNxWf6O44wQ",
+          "mode": "list",
+          "cachedResultName": "localeagledemo",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1l1sX7lcwiSnjeucCzhB-2y9VVBLYj4isYNxWf6O44wQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "review",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1l1sX7lcwiSnjeucCzhB-2y9VVBLYj4isYNxWf6O44wQ/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $('Get row(s) in sheet').item.json.Name }}",
+            "Review": "={{ $('Get row(s) in sheet').item.json.Review }}",
+            "SentimentAnalysis": "={{ $json.message.content }}"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Review",
+              "displayName": "Review",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "SentimentAnalysis",
+              "displayName": "SentimentAnalysis",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        800,
+        0
+      ],
+      "id": "a19dd6fd-48ae-4e88-8e21-0643437bf69b",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "pQlEzrMQL0TViTXO",
+          "name": "B24_account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "980f1686-7085-4af0-beaa-c52a861645fc",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "391ccf06240767a70e415db25ca1487c5b245e4a473dd0cfcdd50bf42284853d"
+  },
+  "id": "N5LgAkdi5QAPBEil",
+  "tags": []
+}
