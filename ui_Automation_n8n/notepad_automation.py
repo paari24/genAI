@@ -1,78 +1,101 @@
+from flask import Flask, request, jsonify
 import pyautogui
 import time
-import sys
 import os
+from typing import Optional
+
+app = Flask(__name__)
 
 # Small defaults to make key sequences less brittle
 pyautogui.PAUSE = 0.12
 pyautogui.FAILSAFE = True
 
+FILE_NAME = "localeagel.txt"
 
-def write_to_notepad(user_input: str):
-    """Append the user input to `localeagel.txt` (guaranteed file write),
-    then open Notepad to display the file and close it.
 
-    Rationale: GUI typing/paste can be flaky. Writing directly to the file ensures
-    the content is saved. Opening Notepad afterward satisfies the requirement to
-    open the file in Notepad and then close it.
+def append_text_to_file(text: str) -> Optional[str]:
+    """Append text to FILE_NAME, flush and fsync, then return the last line read back.
+    Returns the last line (without newline) or None on error.
     """
-    file_name = "localeagel.txt"
-    file_path = os.path.abspath(file_name)
-
-    # Append to the file (guaranteed save)
+    file_path = os.path.abspath(FILE_NAME)
     try:
         with open(file_path, 'a', encoding='utf-8') as f:
-            f.write(user_input + "\n")
+            f.write(text + "\n")
             f.flush()
-            # ensure data is written to disk
             try:
                 os.fsync(f.fileno())
             except Exception:
-                # fsync may not be available on all platforms but on Windows it's fine
                 pass
     except Exception as e:
-        print(f"Error writing to {file_path}: {e}")
-        raise
+        app.logger.exception("Error writing to file")
+        return None
 
-    # Verify the last line was written correctly
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             lines = f.readlines()
             last_line = lines[-1].rstrip('\n') if lines else ''
-    except Exception as e:
-        print(f"Error reading back {file_path}: {e}")
-        last_line = None
+            return last_line
+    except Exception:
+        app.logger.exception("Error reading file back")
+        return None
 
-    if last_line == user_input:
-        print(f"Successfully wrote to {file_path}: '{last_line}'")
-    else:
-        print(f"Warning: last line in {file_path!r} does not match input. last_line={last_line!r}")
 
-    # Open Notepad with the full path so the saved content is visible
-    # Use quotes around the path to handle spaces
+def open_and_close_notepad(file_path: str):
+    """Open Notepad with the file path and close it. Non-blocking UI actions with small waits."""
     run_cmd = f'notepad "{file_path}"'
     pyautogui.hotkey('win', 'r')
     time.sleep(0.5)
     pyautogui.write(run_cmd)
     pyautogui.press('enter')
-    # give Notepad time to open and render the file
     time.sleep(1.2)
-
-    # Close Notepad cleanly
     try:
         pyautogui.hotkey('alt', 'f4')
         time.sleep(0.2)
-        # In case a prompt appears (shouldn't, since file is already saved), confirm
         pyautogui.press('enter')
-    except Exception as e:
-        print(f"Error while trying to close Notepad: {e}")
+    except Exception:
+        app.logger.exception('Failed to close Notepad via pyautogui')
 
 
-if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python notepad_automation.py \"your text here\"")
-        sys.exit(1)
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({"status": "ok", "file": FILE_NAME})
 
-    # Join all args so multi-word inputs work as expected
-    user_input = " ".join(sys.argv[1:])
-    write_to_notepad(user_input)
+
+@app.route('/write', methods=['POST'])
+def write_endpoint():
+    """POST JSON {"text": "...", "open": true/false}
+
+    - text: required string to append
+    - open: optional boolean (default true) whether to open Notepad after writing
+    """
+    data = request.get_json(silent=True) or request.form
+    text = data.get('text') if isinstance(data, dict) else None
+    if not text:
+        return jsonify({"error": "'text' is required in JSON body or form data"}), 400
+
+    last_line = append_text_to_file(text)
+    if last_line is None:
+        return jsonify({"error": "failed to write to file"}), 500
+
+    open_flag = True
+    if isinstance(data, dict):
+        open_flag = bool(data.get('open', True))
+    else:
+        open_flag = data.get('open', 'true').lower() in ('1', 'true', 'yes') if data.get('open') is not None else True
+
+    file_path = os.path.abspath(FILE_NAME)
+    if open_flag:
+        # open and close Notepad to satisfy the UI requirement
+        open_and_close_notepad(file_path)
+
+    response = {
+        'status': 'ok',
+        'file': file_path,
+        'last_line': last_line,
+    }
+    return jsonify(response)
+
+
+if __name__ == '__main__':
+    # Run the Flask app on port 5000
+    app.run(host='127.0.0.1', port=5000)

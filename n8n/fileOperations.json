@@ -1,0 +1,301 @@
+{
+  "name": "fileOperations",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c3cf79a5-fbde-451b-8571-4e207a4f02fa",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"customers\": [\n    {\n      \"id\": \"CUST-1001\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\",\n      \"email\": \"john.doe@example.com\",\n      \"phone\": \"+1-202-555-0178\",\n      \"address\": {\n        \"street\": \"123 Main St\",\n        \"city\": \"New York\",\n        \"state\": \"NY\",\n        \"postalCode\": \"10001\",\n        \"country\": \"USA\"\n      },\n      \"dateOfBirth\": \"1980-05-15\",\n      \"isSubscribed\": true,\n      \"loyaltyPoints\": 120,\n      \"createdAt\": \"2025-07-23T20:30:00Z\"\n    },\n    {\n      \"id\": \"CUST-1002\",\n      \"firstName\": \"Anita\",\n      \"lastName\": \"Kumar\",\n      \"email\": \"anita.kumar@example.com\",\n      \"phone\": \"+91-9876543210\",\n      \"address\": {\n        \"street\": \"45 MG Road\",\n        \"city\": \"Bangalore\",\n        \"state\": \"KA\",\n        \"postalCode\": \"560001\",\n        \"country\": \"India\"\n      },\n      \"dateOfBirth\": \"1992-11-05\",\n      \"isSubscribed\": false,\n      \"loyaltyPoints\": 80,\n      \"createdAt\": \"2025-09-10T14:15:00Z\"\n    },\n    {\n      \"id\": \"CUST-1003\",\n      \"firstName\": \"Suresh\",\n      \"lastName\": \"Pillai\",\n      \"email\": \"suresh.pillai@example.com\",\n      \"phone\": \"+91-9988776655\",\n      \"address\": {\n        \"street\": \"12 MG Street\",\n        \"city\": \"Chennai\",\n        \"state\": \"TN\",\n        \"postalCode\": \"600001\",\n        \"country\": \"India\"\n      },\n      \"dateOfBirth\": \"1985-03-20\",\n      \"isSubscribed\": true,\n      \"loyaltyPoints\": 250,\n      \"createdAt\": \"2025-08-25T09:45:00Z\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c0ba5890-6854-442f-8b40-6afcee643204",
+      "name": "sourceMockData",
+      "notesInFlow": true,
+      "notes": "Create mock Data JSON"
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {
+          "fileName": "=localEagle_demo_{{new Date().toLocaleString(\"en-US\", { timeZone: \"Asia/Kolkata\", hour12: false }).replace(/(\\d+)\\/(\\d+)\\/(\\d+), (\\d+):(\\d+).*/, (_, m, d, y, h, min) => (m.padStart(2,\"0\")+d.padStart(2,\"0\")+y+\"_\"+h.padStart(2,\"0\")+min.padStart(2,\"0\")))\n}}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "db917f47-18f4-411f-9a45-71b623b459cd",
+      "name": "Convert to JSON",
+      "notesInFlow": false,
+      "notes": "Convert JSON to a file with current date and time in file name"
+    },
+    {
+      "parameters": {
+        "operation": "html",
+        "options": {
+          "fileName": "=localEagle_demo_{{new Date().toLocaleString(\"en-US\", { timeZone: \"Asia/Kolkata\", hour12: false }).replace(/(\\d+)\\/(\\d+)\\/(\\d+), (\\d+):(\\d+).*/, (_, m, d, y, h, min) => (m.padStart(2,\"0\")+d.padStart(2,\"0\")+y+\"_\"+h.padStart(2,\"0\")+min.padStart(2,\"0\"))) }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        416,
+        -160
+      ],
+      "id": "e5f91e27-1d28-4956-96e5-f342468f9305",
+      "name": "Convert to HTML"
+    },
+    {
+      "parameters": {
+        "operation": "xls",
+        "options": {
+          "fileName": "=localEagle_demo_{{new Date().toLocaleString(\"en-US\", { timeZone: \"Asia/Kolkata\", hour12: false }).replace(/(\\d+)\\/(\\d+)\\/(\\d+), (\\d+):(\\d+).*/, (_, m, d, y, h, min) => (m.padStart(2,\"0\")+d.padStart(2,\"0\")+y+\"_\"+h.padStart(2,\"0\")+min.padStart(2,\"0\"))) }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        416,
+        176
+      ],
+      "id": "f084e41b-ecf4-415d-94b9-0dd43e6909ca",
+      "name": "Convert to XLS"
+    },
+    {
+      "parameters": {
+        "options": {
+          "fileName": "=localEagle_demo_{{new Date().toLocaleString(\"en-US\", { timeZone: \"Asia/Kolkata\", hour12: false }).replace(/(\\d+)\\/(\\d+)\\/(\\d+), (\\d+):(\\d+).*/, (_, m, d, y, h, min) => (m.padStart(2,\"0\")+d.padStart(2,\"0\")+y+\"_\"+h.padStart(2,\"0\")+min.padStart(2,\"0\"))) }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        416,
+        352
+      ],
+      "id": "623071d0-d33f-4b5a-9723-55b4faf6332d",
+      "name": "Convert to CSV"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "customers",
+        "options": {
+          "fileName": "=localEagle_demo_{{new Date().toLocaleString(\"en-US\", { timeZone: \"Asia/Kolkata\", hour12: false }).replace(/(\\d+)\\/(\\d+)\\/(\\d+), (\\d+):(\\d+).*/, (_, m, d, y, h, min) => (m.padStart(2,\"0\")+d.padStart(2,\"0\")+y+\"_\"+h.padStart(2,\"0\")+min.padStart(2,\"0\"))) }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        416,
+        -320
+      ],
+      "id": "544dc612-c240-43ce-9c69-07b71dbcecb2",
+      "name": "Convert to txtFile"
+    },
+    {
+      "parameters": {
+        "operation": "html",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        608,
+        -160
+      ],
+      "id": "f10d8ccf-b4e6-4bb3-8fd0-50627be39adc",
+      "name": "Extract from html"
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        608,
+        0
+      ],
+      "id": "4f7668bc-5815-4ddd-9227-51fd6be1be8a",
+      "name": "Extract from json",
+      "notesInFlow": true,
+      "notes": "Extract JSON from a file and converting to JSON"
+    },
+    {
+      "parameters": {
+        "operation": "xls",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        608,
+        176
+      ],
+      "id": "82571875-dafa-44d9-bde3-b54742112c1b",
+      "name": "Extract from xls"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        608,
+        352
+      ],
+      "id": "e7d2fc0f-9036-4ed3-8946-5c204d8f2bd7",
+      "name": "Extract from csv"
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        608,
+        -320
+      ],
+      "id": "e89cd38a-8b14-44cb-85f2-72e337cbb7ca",
+      "name": "Extract from File"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "sourceMockData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sourceMockData": {
+      "main": [
+        [
+          {
+            "node": "Convert to JSON",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Convert to HTML",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Convert to txtFile",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Convert to XLS",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Convert to CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to JSON": {
+      "main": [
+        [
+          {
+            "node": "Extract from json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to HTML": {
+      "main": [
+        [
+          {
+            "node": "Extract from html",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to XLS": {
+      "main": [
+        [
+          {
+            "node": "Extract from xls",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from json": {
+      "main": [
+        []
+      ]
+    },
+    "Convert to CSV": {
+      "main": [
+        [
+          {
+            "node": "Extract from csv",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to txtFile": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "96e8fb5e-b8b9-458e-8e0a-18b4e0f3860a",
+  "meta": {
+    "instanceId": "391ccf06240767a70e415db25ca1487c5b245e4a473dd0cfcdd50bf42284853d"
+  },
+  "id": "DJL0KekAtV0CC2D0",
+  "tags": []
+}

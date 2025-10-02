@@ -14,8 +14,30 @@ python -m pip install -r requirements.txt
 
 Usage:
 
+Command-line usage (legacy):
+
 ```powershell
 python .\notepad_automation.py "your text here"
+```
+
+Flask API usage (new):
+
+Start the server:
+
+```powershell
+python .\notepad_automation.py
+```
+
+POST JSON to append text and open Notepad (default):
+
+```powershell
+curl -X POST http://127.0.0.1:5000/write -H "Content-Type: application/json" -d '{"text":"hello from api"}'
+```
+
+To append without opening Notepad:
+
+```powershell
+curl -X POST http://127.0.0.1:5000/write -H "Content-Type: application/json" -d '{"text":"no ui", "open": false}'
 ```
 
 Notes:

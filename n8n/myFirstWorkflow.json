@@ -1,0 +1,78 @@
+{
+  "name": "myFirstWorkflow",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "70c60e08-8772-4365-869e-0cf6da25df60",
+              "name": "Name",
+              "value": "Paari",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -32,
+        -80
+      ],
+      "id": "243ba6ac-79d0-41dc-9426-6668a016ae72",
+      "name": "settingName"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4f44f64b-d5d3-4419-9c55-8cf2f7bc279b",
+              "name": "greeting",
+              "value": "=Hello {{ $json.Name }} Wecome to the world",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        -80
+      ],
+      "id": "0ce4cd28-6706-47bb-b579-93b7afa2a6f7",
+      "name": "greetingMes"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "settingName": {
+      "main": [
+        [
+          {
+            "node": "greetingMes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Kolkata",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "0a88340c-41b3-4f98-a4a8-b018ba33022a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "391ccf06240767a70e415db25ca1487c5b245e4a473dd0cfcdd50bf42284853d"
+  },
+  "id": "dTAF29Jp3WwiM282",
+  "tags": []
+}
