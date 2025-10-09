@@ -1,0 +1,262 @@
+{
+  "name": "Extract Text from Images with Telegram Bot & OCR Tesseractjs",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {
+          "download": true
+        }
+      },
+      "id": "a5d05f82-eb64-4abb-82d8-c2365fea90e8",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "position": [
+        368,
+        240
+      ],
+      "webhookId": "b957dd8b-8f10-40e9-a041-56b3f7a176b9",
+      "typeVersion": 1.2,
+      "credentials": {
+        "telegramApi": {
+          "id": "cYC2QnMXkpgdsfe6",
+          "name": "Boybabybot_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c8cd1608-2326-401d-9c47-79a6a72f5fc7",
+              "name": "chatID",
+              "type": "number",
+              "value": "={{ $json.message.chat.id }}"
+            },
+            {
+              "id": "0f1a41cb-8630-4e10-b445-f6bbbcf91d33",
+              "name": "Image",
+              "type": "string",
+              "value": "={{ $json[\"message\"][\"photo\"][$json[\"message\"][\"photo\"].length - 1][\"file_id\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9c8d3318-b6f8-4fe5-8d19-10388087beb7",
+      "name": "Clean Input Data",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        592,
+        240
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.Image.replace(/\\n/g, '') }}",
+        "additionalFields": {}
+      },
+      "id": "ffb53d49-3a5f-4a65-95bd-0788f5005fc7",
+      "name": "get file",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        816,
+        240
+      ],
+      "webhookId": "089cb9a3-a383-4e1d-b732-b877833ef538",
+      "typeVersion": 1.2,
+      "credentials": {
+        "telegramApi": {
+          "id": "cYC2QnMXkpgdsfe6",
+          "name": "Boybabybot_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Clean Input Data').item.json.chatID }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "e77fb512-c83c-4d18-9ded-13c02abfef45",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        1840,
+        240
+      ],
+      "webhookId": "1c599e35-fb24-4cae-9177-61fa09e0b5ca",
+      "typeVersion": 1.2,
+      "credentials": {
+        "telegramApi": {
+          "id": "cYC2QnMXkpgdsfe6",
+          "name": "Boybabybot_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "You are an AI assistant designed to clarify text extracted from images through OCR.\n\nYour primary goal is to make OCR results easier to read and understand for users by tidying up formatting, correcting character recognition errors, and restructuring the content to make it more logical.\n\n🧠 Behavior Guidelines:\nIf OCRed text resembles a table or structured data, do not recreate it as a table. Instead, convert it into concise bullet points for better readability.\n\nFocus on clarity, accuracy, and user-friendly formatting.\n\nFix common issues with OCR results such as:\n\n- Truncated words or sentences\n- Incorrectly recognized characters\n..."
+        }
+      },
+      "id": "5badb159-c0e8-4129-8387-409541cdcc20",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        1264,
+        240
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "jsCode": "let text = $json.output;\n\ntext = text\n  .replace(/[_*[\\]()~`>#+\\-=|{}.!]/g, '\\\\$&'); // Escape karakter markdown V2\n\nreturn { json: { output: text } };\n"
+      },
+      "id": "c807e0eb-566b-46fb-8772-33cb6ab883df",
+      "name": "Replace",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1616,
+        240
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "f2faea2c-3a9c-4275-b92b-5fae4e04f2d1",
+      "name": "Tesseract OCR",
+      "type": "n8n-nodes-tesseractjs.tesseractNode",
+      "position": [
+        1040,
+        240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1344,
+        464
+      ],
+      "id": "783d03ea-23ac-4bad-94c2-7aaff85ba807",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "1ZRXiDzT0Bz6GVBj",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Replace": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Replace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get file": {
+      "main": [
+        [
+          {
+            "node": "Tesseract OCR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tesseract OCR": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean Input Data": {
+      "main": [
+        [
+          {
+            "node": "get file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Clean Input Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "c4390740-9257-4fc2-905c-9c12c89943fa",
+  "meta": {
+    "templateId": "5413",
+    "templateCredsSetupCompleted": true,
+    "instanceId": "391ccf06240767a70e415db25ca1487c5b245e4a473dd0cfcdd50bf42284853d"
+  },
+  "id": "WSAIkepZiaDj72lC",
+  "tags": []
+}

@@ -1,0 +1,780 @@
+{
+  "name": "CustomerFlow",
+  "nodes": [
+    {
+      "parameters": {
+        "tableId": "customer_details",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "name",
+              "fieldValue": "={{ $json.Name }}"
+            },
+            {
+              "fieldId": "mobile_no",
+              "fieldValue": "={{ $json[\"Mobile No\"] }}"
+            },
+            {
+              "fieldId": "email",
+              "fieldValue": "={{ $json[\"Email input\"] }}"
+            },
+            {
+              "fieldId": "product",
+              "fieldValue": "={{ $json.Product }}"
+            },
+            {
+              "fieldId": "model",
+              "fieldValue": "={{ $json.MODEL }}"
+            },
+            {
+              "fieldId": "price_range",
+              "fieldValue": "={{ $json[\"Price Range\"] }}"
+            },
+            {
+              "fieldId": "raw_timestamp",
+              "fieldValue": "={{ $json.dateandtime }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -144
+      ],
+      "id": "1dacfd38-9ccc-432e-9f30-2689964dd2fa",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "dAFuCktwlZ47KFub",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://6aad75383af8.ngrok-free.app/send-message",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "mobile_number",
+              "value": "=+91{{ $json.mobile_no }}"
+            },
+            {
+              "name": "message",
+              "value": "=Hello {{ $json.name.toTitleCase() }}! 👋\nWelcome to Samsung SmartPlaza!\nWe’re thrilled to have you here. You’ve shown interest in the {{ $json.product }} (Model {{ $json.model }}) — great choice! 🎉\nEnjoy exclusive in-store discounts and get the best price, even lower than online!\n\nThank you for visiting — we truly appreciate it and look forward to helping you find your perfect {{ $json.product }}  ! 💫"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        176,
+        -144
+      ],
+      "id": "13bea155-80b4-4968-8ec7-ab30de3adf3b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "formTitle": "🧾 Customer Details Form",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Mobile No",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email input"
+            },
+            {
+              "fieldLabel": "Product",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "TV"
+                  },
+                  {
+                    "option": "FRIDGE"
+                  },
+                  {
+                    "option": "WASHING MACHINE"
+                  },
+                  {
+                    "option": "MOBILE / TAB"
+                  },
+                  {
+                    "option": "AC"
+                  },
+                  {
+                    "option": "ACCESSORIES"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "MODEL",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Price Range",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "₹0–₹10K"
+                  },
+                  {
+                    "option": "₹10K–₹50K"
+                  },
+                  {
+                    "option": "₹50K–₹1L"
+                  },
+                  {
+                    "option": "₹1L+"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldName": "dateandtime",
+              "fieldType": "hiddenField",
+              "fieldValue": "={{ new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}) }}\n"
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -272,
+        -144
+      ],
+      "id": "10e5f213-151f-43ae-b055-f49132e62f96",
+      "name": "CustomerWalkin",
+      "webhookId": "80a32e9e-8668-4dd8-aad1-c46911a436cc"
+    },
+    {
+      "parameters": {
+        "content": "## Customer WalkinEntry",
+        "height": 224,
+        "width": 800,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -400,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "5a8c04a5-4d9d-45a2-b8bb-e7574fe8d904",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "tableId": "invoice_details",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "customer_name",
+              "fieldValue": "={{ $json.Name }}"
+            },
+            {
+              "fieldId": "mobile_no",
+              "fieldValue": "={{ $json[\"Mobile No\"] }}"
+            },
+            {
+              "fieldId": "email",
+              "fieldValue": "={{ $json[\"Email input\"] }}"
+            },
+            {
+              "fieldId": "product",
+              "fieldValue": "={{ $json.Product }}"
+            },
+            {
+              "fieldId": "model",
+              "fieldValue": "={{ $json.MODEL }}"
+            },
+            {
+              "fieldId": "price",
+              "fieldValue": "={{ $json.Price }}"
+            },
+            {
+              "fieldId": "purchase_date",
+              "fieldValue": "={{ $json.dateandtime }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        160
+      ],
+      "id": "36c9d618-8003-454b-bf42-b120a37546ee",
+      "name": "Create a row1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "dAFuCktwlZ47KFub",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://6aad75383af8.ngrok-free.app/send-message",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "mobile_number",
+              "value": "=+91{{ $('CustomerWalkin1').item.json[\"Mobile No\"] }}"
+            },
+            {
+              "name": "message",
+              "value": "=Hello ! 👋\nThank you for your purchase {{ $('CustomerWalkin1').item.json.MODEL }}— your invoice amount is ₹ {{ $('CustomerWalkin1').item.json.Price }}\nWe truly appreciate your visit to Samsung SmartPlaza. Come again soon!\nHere’s a 5% off promo code for your next purchase: {{ $json.coupon_code }} (valid for 90 days).\nEnjoy — and thanks for choosing Samsung SmartPlaza! 💫\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        160
+      ],
+      "id": "a3deaf7e-d2d0-48a5-9e09-79fc4df5aeb6",
+      "name": "HTTP Request1",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "content": "## Customer Invoice",
+        "height": 256,
+        "width": 1136,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -400,
+        64
+      ],
+      "typeVersion": 1,
+      "id": "e5835909-d7d8-42b4-b8fe-8a81e9ed4b4d",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "formTitle": "🧾 Customer Invoice",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Mobile No",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email input"
+            },
+            {
+              "fieldLabel": "Product",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "TV"
+                  },
+                  {
+                    "option": "FRIDGE"
+                  },
+                  {
+                    "option": "WASHING MACHINE"
+                  },
+                  {
+                    "option": "MOBILE / TAB"
+                  },
+                  {
+                    "option": "AC"
+                  },
+                  {
+                    "option": "ACCESSORIES"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "MODEL",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Price",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldName": "dateandtime",
+              "fieldType": "hiddenField",
+              "fieldValue": "={{ new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}) }}\n"
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -336,
+        160
+      ],
+      "id": "821aac80-b7b1-4e45-b0be-4412587df926",
+      "name": "CustomerWalkin1",
+      "webhookId": "091ffba6-8b38-46fb-af0b-e904aa959334"
+    },
+    {
+      "parameters": {
+        "jsCode": "function generateCoupon(suffixLength = 6) {\n  const prefix = 'SSP';\n  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';\n  let suffix = '';\n  for (let i = 0; i < suffixLength; i++) {\n    suffix += chars.charAt(Math.floor(Math.random() * chars.length));\n  }\n  return prefix + suffix;\n}\n\n// Example: generate 1 coupon\nconst couponCode = generateCoupon();\n\n// Return in correct n8n format\nreturn [\n  {\n    json: {\n      coupon: couponCode\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        160
+      ],
+      "id": "55311806-a05b-43dd-8a4a-23b279406a41",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "tableId": "coupon_details",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "coupon_code",
+              "fieldValue": "={{ $json.coupon }}"
+            },
+            {
+              "fieldId": "customer_number",
+              "fieldValue": "={{ $('CustomerWalkin1').item.json[\"Mobile No\"] }}"
+            },
+            {
+              "fieldId": "discount_percent",
+              "fieldValue": "5"
+            },
+            {
+              "fieldId": "valid_from",
+              "fieldValue": "={{ new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]\n }}"
+            },
+            {
+              "fieldId": "valid_to",
+              "fieldValue": "={{new Date(Date.now() + Math.random() * 90* 24 * 60 * 60 * 1000).toISOString().split('T')[0]}}"
+            },
+            {
+              "fieldId": "is_active",
+              "fieldValue": "true"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        336,
+        160
+      ],
+      "id": "6b874351-28ef-4b8e-9b67-a14dac41b94b",
+      "name": "Create a row2",
+      "credentials": {
+        "supabaseApi": {
+          "id": "dAFuCktwlZ47KFub",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 6
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -272,
+        448
+      ],
+      "id": "8841d6cc-17e2-4e5a-afc4-e0bf1ffa77d5",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "content": "## Customer Followup",
+        "height": 320,
+        "width": 2032,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -400,
+        352
+      ],
+      "typeVersion": 1,
+      "id": "95bcd680-33b1-4062-8dfa-e7b228647402",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "customer_details"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        448
+      ],
+      "id": "f3015320-07dd-4370-b15d-a2a8e3c11e9d",
+      "name": "Get many rows",
+      "credentials": {
+        "supabaseApi": {
+          "id": "dAFuCktwlZ47KFub",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "invoice_details",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "mobile_no",
+              "condition": "eq",
+              "keyValue": "={{ $json.mobile_no }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        176,
+        448
+      ],
+      "id": "a6de6e09-aef4-40ad-848b-12cbcf0675f4",
+      "name": "Get many rows1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "dAFuCktwlZ47KFub",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "tableId": "customer_details",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "mobile_no",
+              "condition": "eq",
+              "keyValue": "={{ $json.mobile_no }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        608,
+        352
+      ],
+      "id": "fd9c93b4-f851-48bd-84ac-0256ad6ff244",
+      "name": "Delete a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "dAFuCktwlZ47KFub",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8f5c28d7-ea3a-4113-90d2-f1becfd86976",
+              "leftValue": "={{ $json.isNotEmpty() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": false
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        448
+      ],
+      "id": "663f27ec-ba95-42a1-a3d1-f82ef5f6dc8c",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "customer_details"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        848,
+        464
+      ],
+      "id": "610043c8-223c-417d-a17c-6426a67d9c19",
+      "name": "Get many rows2",
+      "credentials": {
+        "supabaseApi": {
+          "id": "dAFuCktwlZ47KFub",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://6aad75383af8.ngrok-free.app/send-message",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "mobile_number",
+              "value": "=+91{{ $json.mobile_no }}"
+            },
+            {
+              "name": "message",
+              "value": "=Hello {{ $json.name.toTitleCase() }}! 👋\nThank you for visiting Samsung SmartPlaza!\nWe loved having you at our store. You checked out the {{ $json.product }}  {{ $json.model }}  — an amazing choice! ✨\nNot sure what held you back, but here’s a reason to smile — come back and enjoy an exclusive 5% discount on your purchase! 🎉\n\nWe truly appreciate your visit and look forward to welcoming you again soon.\nThanks for choosing Samsung SmartPlaza! 💫"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1104,
+        464
+      ],
+      "id": "c45cbeb1-178f-4a46-98c5-202279fafdc1",
+      "name": "HTTP Request2",
+      "alwaysOutputData": false
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Create a row": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "CustomerWalkin": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CustomerWalkin1": {
+      "main": [
+        [
+          {
+            "node": "Create a row1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Create a row2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get many rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows": {
+      "main": [
+        [
+          {
+            "node": "Get many rows1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Delete a row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get many rows2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete a row": {
+      "main": [
+        [
+          {
+            "node": "Get many rows2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2f5c074f-4d11-4d53-af9a-e0ab7fac00b4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "391ccf06240767a70e415db25ca1487c5b245e4a473dd0cfcdd50bf42284853d"
+  },
+  "id": "2NphVM9bM1sifIux",
+  "tags": []
+}

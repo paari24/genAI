@@ -1,0 +1,256 @@
+{
+  "name": "resumeGenerator",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "55675bb8-db03-458f-af4e-24fab940bf0f",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "Run actor and get dataset",
+        "actorId": {
+          "__rl": true,
+          "value": "alpcnRV9YI9lYVPWk",
+          "mode": "list",
+          "cachedResultName": "Naukri Job Scraper (muhammetakkurtt/naukri-job-scraper)",
+          "cachedResultUrl": "https://console.apify.com/actors/alpcnRV9YI9lYVPWk/input"
+        },
+        "customBody": "{\n  \"keyword\": \"Testing\",\n  \"maxJobs\": 50,\n  \"freshness\": \"3\",\n  \"sortBy\": \"date\",\n  \"experience\": \"10\"\n}",
+        "timeout": {}
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "1555dd59-080c-4871-a084-b4d398463e3c",
+      "name": "Run an Actor and get dataset",
+      "credentials": {
+        "apifyApi": {
+          "id": "27EK5Ax750K3JVvM",
+          "name": "Apify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b73f16b1-a98e-400a-b68c-85661288e24e",
+              "name": "Job Title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "4c105ae2-d92c-42e5-aebd-19335e3454dd",
+              "name": "Company Name",
+              "value": "={{ $json.companyName }}",
+              "type": "string"
+            },
+            {
+              "id": "e88ae91d-e1e3-439d-a6a1-58f7b4ef605b",
+              "name": "Job post link",
+              "value": "={{ $json.jdURL }}",
+              "type": "string"
+            },
+            {
+              "id": "7af11d21-190f-43de-b931-6c5b0cb3865e",
+              "name": "Job Description",
+              "value": "={{ $json.jobDescription }}",
+              "type": "string"
+            },
+            {
+              "id": "9d670346-f5ea-4e91-b7e8-5d17f5615a3b",
+              "name": "Job Keyword",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        0
+      ],
+      "id": "0e3b25be-a440-4acd-91fa-5cb58f0ef043",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1WdyNFXXZUi7kJVQPPgL2nFGWJ5WJ1o-Gtmtg3H0qwp0",
+          "mode": "list",
+          "cachedResultName": "jobScrap",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WdyNFXXZUi7kJVQPPgL2nFGWJ5WJ1o-Gtmtg3H0qwp0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WdyNFXXZUi7kJVQPPgL2nFGWJ5WJ1o-Gtmtg3H0qwp0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Job Title": "={{ $json[\"Job Title\"] }}",
+            "Company Name:": "={{ $json[\"Company Name\"] }}",
+            "Job post link:": "={{ $json[\"Job post link\"] }}",
+            "Job Description:": "={{ $json[\"Job Description\"] }}"
+          },
+          "matchingColumns": [
+            "Job post link:"
+          ],
+          "schema": [
+            {
+              "id": "Job Title",
+              "displayName": "Job Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Company Name:",
+              "displayName": "Company Name:",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Job post link:",
+              "displayName": "Job post link:",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Job Description:",
+              "displayName": "Job Description:",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        0
+      ],
+      "id": "cd6ce984-90f7-420e-b694-c3c27dbe9ec0",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "pQlEzrMQL0TViTXO",
+          "name": "B24_account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Scraping the data from naukri and updating the Google sheet",
+        "height": 256,
+        "width": 1040
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -144,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "fb0fa2dc-fa46-47e1-9ebd-e58e78021747",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-tesseractjs.tesseractNode",
+      "typeVersion": 1,
+      "position": [
+        144,
+        144
+      ],
+      "id": "a7645681-8d2d-45c3-b4e0-3c53d78d7174",
+      "name": "Tesseract"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Run an Actor and get dataset",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run an Actor and get dataset": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3a473ebd-35f7-4ee9-9564-6c8f6b00ba4e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "391ccf06240767a70e415db25ca1487c5b245e4a473dd0cfcdd50bf42284853d"
+  },
+  "id": "jwklBBa9uJKqSooU",
+  "tags": []
+}

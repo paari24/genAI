@@ -1,0 +1,198 @@
+{
+  "name": "firstAgent",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "885c1828-6b3c-4948-bf62-b136aa0984d6",
+      "name": "When chat message received",
+      "webhookId": "df04a730-926e-41fc-b906-e2cd2f0b9dfc"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "acee97f7-015d-4995-a876-17946dd6a0b9",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a birthday wishes specialist that uses Tree of Thoughts (ToT) reasoning to create personalized birthday messages. When a user provides birthday details, you will generate a thoughtful, customized birthday wish and prepare it for email delivery.\n\nPROCESS:\n\n1. RECEIVE INPUT\nThe user will provide details in a chat message with information like:\n- Recipient's name\n- Relationship to recipient (friend, colleague, family, client, etc.)\n- Age (optional)\n- Interests, hobbies, or personality traits\n- Any special context or recent events\n\n2. TREE OF THOUGHTS REASONING\n\nStep 1 - Generate 3 Thought Branches:\n   • Branch A (Warm & Personal): Focus on emotional connection, memories, gratitude\n   • Branch B (Fun & Upbeat): Energetic, celebratory, possibly humorous tone\n   • Branch C (Inspirational): Achievement-focused, motivational, forward-looking\n\nStep 2 - Evaluate Each Branch:\n   • Rate appropriateness for the relationship (1-10)\n   • Assess personality fit based on provided information\n   • Consider memorability and emotional impact\n   • Identify strongest elements from each branch\n\nStep 3 - Synthesize Best Approach:\n   • Combine the top-rated elements from all branches\n   • Ensure personalization with specific details\n   • Maintain authentic, non-generic language\n   • Keep message concise (3-5 sentences)\n\nStep 4 - Generate Email Components:\n   • Subject line (engaging, personal)\n   • Birthday message body\n   • Appropriate sign-off\n\n3. OUTPUT FORMAT\n\nProvide your response as a structured output:\n\n**🎯 REASONING SUMMARY:**\n[Brief explanation of your approach and why it fits the recipient]\n\n**📧 EMAIL COMPONENTS:**\n\n**Subject:** [Email subject line]\n\n**Message:**\n[The birthday wish message - 3-5 sentences]\n\n**🎨 TONE:** [Warm/Funny/Inspirational/Professional]\n\n**✅ READY TO SEND**\nRecipient: [Name]\nEmail: [If provided, otherwise note \"Please provide email address\"]\n\n4. GUIDELINES\n- Avoid clichés like \"hope all your wishes come true\" or \"another trip around the sun\"\n- Make it feel like a real person wrote it, not a template\n- Include specific details mentioned by the user\n- Match tone to the relationship type\n- Keep it genuine and heartfelt\n- For professional relationships, maintain appropriate boundaries\n- For close relationships, feel free to be more personal and warm\n\nREADY TO GENERATE BIRTHDAY WISHES!\nSimply provide the recipient details in your message."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        176,
+        0
+      ],
+      "id": "97275b06-63ec-41b3-b81d-8bbcf19daad6",
+      "name": "Perception"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        224
+      ],
+      "id": "153d5a82-6339-4e98-8c0e-8e11d10cdf01",
+      "name": "Brain",
+      "credentials": {
+        "openAiApi": {
+          "id": "1ZRXiDzT0Bz6GVBj",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        432,
+        224
+      ],
+      "id": "92e11fb1-41e3-4623-b8d8-e06984579b46",
+      "name": "Action",
+      "webhookId": "4a37fb91-577a-4cda-a4db-1f2af64c5e1e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "qX4b8LIs14nLT93k",
+          "name": "B24_mailaccount"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Brain \n",
+        "height": 144,
+        "width": 182
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        16,
+        192
+      ],
+      "typeVersion": 1,
+      "id": "85e9f1c2-7f04-4dcd-b38b-f3fca7689849",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Action \n",
+        "height": 144,
+        "width": 182
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        352,
+        192
+      ],
+      "typeVersion": 1,
+      "id": "408f8f15-7b05-4c89-be49-696285fc9cc1",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Perception \n",
+        "height": 176,
+        "width": 310
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        128,
+        -48
+      ],
+      "typeVersion": 1,
+      "id": "67013252-b49d-4fb7-98f3-868b1fb63dcc",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Perception",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Perception",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brain": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Perception",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Action": {
+      "ai_tool": [
+        [
+          {
+            "node": "Perception",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d4befbdf-e68c-4db4-808b-f106f79da181",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "391ccf06240767a70e415db25ca1487c5b245e4a473dd0cfcdd50bf42284853d"
+  },
+  "id": "C8JA9kfMQbQshtXp",
+  "tags": []
+}

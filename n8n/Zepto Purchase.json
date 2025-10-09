@@ -1,0 +1,386 @@
+{
+  "name": "Zepto Purchase",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.voice.file_id }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d11d355a-1731-436e-ba5e-8709d4a9c43d",
+                    "leftValue": "={{ $json.message.text || \"\" }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Text"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7967e047-ebab-4323-b1dc-d5f6a9c22200",
+                    "leftValue": "error",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Error"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        112,
+        32
+      ],
+      "id": "a43b5a05-ae05-41ca-80a1-332d03efe7f3",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        336,
+        -48
+      ],
+      "id": "189e0900-1fe1-42a6-b104-cd00fe471018",
+      "name": "Telegram",
+      "webhookId": "2cff26e3-2e35-4437-ae5a-248c949601c6"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        560,
+        -48
+      ],
+      "id": "a2e9c9f8-6d32-4237-af06-21b7bb1cf7e5",
+      "name": "Transcriber"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.text }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        928,
+        272
+      ],
+      "id": "5177c935-dd9f-45d6-91c7-738aaf6c74d7",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        800,
+        272
+      ],
+      "id": "5647391b-f1b3-4daf-a4b2-44483b13af88",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "39d2fa7c-a5cb-4d82-be01-2d23c9afaca8",
+              "name": "text",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        144
+      ],
+      "id": "68407751-74a7-4d45-8523-8e0573a8ae9a",
+      "name": "Normal text"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -112,
+        48
+      ],
+      "id": "141190db-c4f2-4401-9e38-909a9d338c14",
+      "name": "Telegram Trigger",
+      "webhookId": "536f248a-2009-4244-a8bd-169329985fe3",
+      "credentials": {
+        "telegramApi": {
+          "id": "cYC2QnMXkpgdsfe6",
+          "name": "Boybabybot_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=Your item is added into the cart! Status : {{ $json.status }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1360,
+        48
+      ],
+      "id": "04467c42-d9c4-4f3f-bba7-94d3c3a1b73b",
+      "name": "Respond  back",
+      "webhookId": "cebe43e0-3110-46b5-b262-1365ccea9442"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "=You are an AI assistant that extracts grocery items from user requests. \n\n#Translate any language into english, Output should only in english\n\n- Your task is to extract only the names of grocery items from the user input.\n- The response must be formatted as a **JSON list** (`[]`) containing only the item names.\n- Do not return explanations, sentences, or any other text.\n- If no grocery items are found, return an empty list `[]`.\n\n### **Examples:**\nUser: \"I need to buy rice, chicken, and onions for cooking.\"\nResponse:\n[\"rice\", \"chicken\", \"onions\"]\n\nUser: \"Can you add milk and bread to my grocery list?\"\nResponse:\n[\"milk\", \"bread\"]\n\nUser: \"Hello, how are you?\"\nResponse:\n[]",
+          "returnIntermediateSteps": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        784,
+        48
+      ],
+      "id": "74032af6-074f-4e55-929e-b6c2722f9ea1",
+      "name": "Ingredient list"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://0f44-183-82-30-180.ngrok-free.app/order",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\n  \"Content-Type\": \"application/json\"\n}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\"products\": {{ $json.output }}\n}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1136,
+        48
+      ],
+      "id": "ad28077c-8996-444f-baa1-ab6905f47853",
+      "name": "Zepto Agent"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Normal text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram": {
+      "main": [
+        [
+          {
+            "node": "Transcriber",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcriber": {
+      "main": [
+        [
+          {
+            "node": "Ingredient list",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Ingredient list",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Ingredient list",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normal text": {
+      "main": [
+        [
+          {
+            "node": "Ingredient list",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ingredient list": {
+      "main": [
+        [
+          {
+            "node": "Zepto Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Zepto Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond  back",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b3fbb63b-536f-4d32-9531-1121c6f85a3f",
+  "meta": {
+    "instanceId": "391ccf06240767a70e415db25ca1487c5b245e4a473dd0cfcdd50bf42284853d"
+  },
+  "id": "euFiedatlCMjIVzf",
+  "tags": []
+}
