@@ -162,7 +162,7 @@ Here is some code. Find and fix any errors:
 ### 25. API Documentation
 Explain how to use the [API name] with an example request and response.
 **Example:**
-> Explain how to use the whatsapp aoi with an example request and response.
+> Explain how to use the WhatsApp API with an example request and response.
 
 ## I. Marketing & Business Prompts
 
@@ -257,9 +257,9 @@ Fluency:
 Creativity:
 Final Score:
 **Example:**
-> Consider your're a Jmeter expert.
+> Consider you are a JMeter expert.
 > 
-> You need to extract the values from reponse headers
+> You need to extract the values from response headers
 > 
 > example: 
 > 
@@ -271,7 +271,7 @@ Final Score:
 > 
 > Extract the value of content-type: , the value is text/html
 > 
-> Give the report in detailed manner anyone can understad in tree of thoughts
+> Give the report in detailed manner anyone can understand in tree of thoughts
 
 ### 39. Prompt Iteration Challenge
 Take this weak prompt: "[Prompt]"

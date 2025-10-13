@@ -9,11 +9,18 @@ import os
 
 load_dotenv()
 
-llm = ChatOpenAI(api_key=os.getenv("OPENAI_API_KEY"), temperature=0.2, model="gpt-4o")
+# Validate API key
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    st.error("⚠️ OPENAI_API_KEY not found. Please set it in your .env file.")
+    st.info("Create a .env file with: OPENAI_API_KEY=your_key_here")
+    st.stop()
+
+llm = ChatOpenAI(api_key=api_key, temperature=0.2, model="gpt-4o")
 
 embeddings = OpenAIEmbeddings()
 
-st.title("RAG App: Ask you pdf Anything")
+st.title("RAG App: Ask Your PDF Anything")
 
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
 
