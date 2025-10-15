@@ -178,10 +178,10 @@
 </p>
 
 <p align="center">
-![Python](https://img.shields.io/badge/Python_3.8+-FFD43B?style=for-the-badge&logo=python&logoColor=blue&labelColor=306998)
-![Flask](https://img.shields.io/badge/Flask_API-000000?style=for-the-badge&logo=flask&logoColor=white&labelColor=000000)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white&labelColor=009688)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white&labelColor=FF4B4B)
+<img src="https://img.shields.io/badge/Python_3.8+-FFD43B?style=for-the-badge&logo=python&logoColor=blue&labelColor=306998" />
+<img src="https://img.shields.io/badge/Flask_API-000000?style=for-the-badge&logo=flask&logoColor=white&labelColor=000000" />
+<img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white&labelColor=009688" />
+<img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white&labelColor=FF4B4B" />
 </p>
 
 ### 🤖 **AI Arsenal** 🤖
@@ -190,11 +190,11 @@
 </p>
 
 <p align="center">
-![LangChain](https://img.shields.io/badge/🦜_LangChain-1C3C3C?style=for-the-badge&logoColor=white&labelColor=1C3C3C)
-![OpenAI](https://img.shields.io/badge/OpenAI_GPT-412991?style=for-the-badge&logo=openai&logoColor=white&labelColor=412991)
-![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-F7931E?style=for-the-badge&logoColor=white&labelColor=F7931E)
-![FAISS](https://img.shields.io/badge/Meta_FAISS-FF6B35?style=for-the-badge&logo=meta&logoColor=white&labelColor=FF6B35)
-![ChromaDB](https://img.shields.io/badge/ChromaDB-4285F4?style=for-the-badge&logo=google&logoColor=white&labelColor=4285F4)
+<img src="https://img.shields.io/badge/🦜_LangChain-1C3C3C?style=for-the-badge&logoColor=white&labelColor=1C3C3C" />
+<img src="https://img.shields.io/badge/OpenAI_GPT-412991?style=for-the-badge&logo=openai&logoColor=white&labelColor=412991" />
+<img src="https://img.shields.io/badge/🤗_HuggingFace-F7931E?style=for-the-badge&logoColor=white&labelColor=F7931E" />
+<img src="https://img.shields.io/badge/Meta_FAISS-FF6B35?style=for-the-badge&logo=meta&logoColor=white&labelColor=FF6B35" />
+<img src="https://img.shields.io/badge/ChromaDB-4285F4?style=for-the-badge&logo=google&logoColor=white&labelColor=4285F4" />
 </p>
 
 ### 🔧 **Automation Matrix** 🔧
@@ -203,10 +203,10 @@
 </p>
 
 <p align="center">
-![Playwright](https://img.shields.io/badge/🎭_Playwright-45ba4b?style=for-the-badge&logoColor=white&labelColor=45ba4b)
-![PyAutoGUI](https://img.shields.io/badge/PyAutoGUI-3776AB?style=for-the-badge&logo=python&logoColor=white&labelColor=3776AB)
-![N8N](https://img.shields.io/badge/⚡_N8N_Workflows-FFD700?style=for-the-badge&logoColor=black&labelColor=FFD700)
-![Flowise](https://img.shields.io/badge/🌊_Flowise-00D4AA?style=for-the-badge&logoColor=white&labelColor=00D4AA)
+<img src="https://img.shields.io/badge/🎭_Playwright-45ba4b?style=for-the-badge&logoColor=white&labelColor=45ba4b" />
+<img src="https://img.shields.io/badge/PyAutoGUI-3776AB?style=for-the-badge&logo=python&logoColor=white&labelColor=3776AB" />
+<img src="https://img.shields.io/badge/⚡_N8N_Workflows-FFD700?style=for-the-badge&logoColor=black&labelColor=FFD700" />
+<img src="https://img.shields.io/badge/🌊_Flowise-00D4AA?style=for-the-badge&logoColor=white&labelColor=00D4AA" />
 </p>
 
 ### 📡 **Integration Hub** 📡
@@ -215,10 +215,10 @@
 </p>
 
 <p align="center">
-![Telegram](https://img.shields.io/badge/Telegram_API-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white&labelColor=2CA5E0)
-![REST](https://img.shields.io/badge/REST_APIs-FF6C37?style=for-the-badge&logo=postman&logoColor=white&labelColor=FF6C37)
-![Ngrok](https://img.shields.io/badge/Ngrok_Tunnels-1F1E37?style=for-the-badge&logo=ngrok&logoColor=white&labelColor=1F1E37)
-![Docker](https://img.shields.io/badge/Docker_Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white&labelColor=2496ED)
+<img src="https://img.shields.io/badge/Telegram_API-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white&labelColor=2CA5E0" />
+<img src="https://img.shields.io/badge/REST_APIs-FF6C37?style=for-the-badge&logo=postman&logoColor=white&labelColor=FF6C37" />
+<img src="https://img.shields.io/badge/Ngrok_Tunnels-1F1E37?style=for-the-badge&logo=ngrok&logoColor=white&labelColor=1F1E37" />
+<img src="https://img.shields.io/badge/Docker_Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white&labelColor=2496ED" />
 </p>
 
 </div>
