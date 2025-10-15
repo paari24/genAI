@@ -1,15 +1,16 @@
 <div align="center">
 
-# 🤖✨ AutoGen Google Calendar Assistant
+# 🤖✨ AutoGen AI Agent Framework
 
 <img src="https://img.shields.io/badge/Python-3.8+-blue.svg" alt="Python Version">
 <img src="https://img.shields.io/badge/AutoGen-Latest-green.svg" alt="AutoGen">
 <img src="https://img.shields.io/badge/Google_Calendar-API-red.svg" alt="Google Calendar">
-<img src="https://img.shields.io/badge/AI-Powered-purple.svg" alt="AI Powered">
+<img src="https://img.shields.io/badge/OpenAI-GPT--4-purple.svg" alt="OpenAI">
+<img src="https://img.shields.io/badge/Multi--Modal-Supported-orange.svg" alt="Multi-Modal">
 
-### *Your AI-Powered Calendar Management Solution* 📅
+### *Comprehensive AI Agent Framework with Calendar Integration, Tools, and Multi-Modal Support* �
 
-[Features](#-features) • [Quick Start](#-quick-start) • [Usage](#-usage) • [Examples](#-examples) • [Configuration](#%EF%B8%8F-configuration)
+[Features](#-features) • [Quick Start](#-quick-start) • [Examples](#-examples) • [Project Files](#-project-files) • [Configuration](#%EF%B8%8F-configuration)
 
 </div>
 
@@ -21,20 +22,44 @@
 <tr>
 <td width="50%">
 
-### 🎯 Smart Calendar Management
-- 📝 Create events with natural language
-- 📅 Fetch today's events instantly
-- 🤖 AI-powered event parsing
-- ⚡ Lightning-fast responses
+### 🎯 Smart AI Agents
+- 🤖 Multiple agent types and configurations
+- 📝 Natural language understanding
+- 🔧 Custom tool integration
+- 📊 Event observation and streaming
+- 🎨 Multi-modal support (text + images)
 
 </td>
 <td width="50%">
 
-### 🔧 Developer Friendly
-- 🐍 Pure Python implementation
+### 📅 Calendar Management
+- ✅ Create events with natural language
+- � Fetch today's events instantly
 - 🔐 Secure OAuth 2.0 authentication
-- 📦 Easy setup & installation
-- 🎨 Clean, modular code
+- ⚡ Lightning-fast responses
+- 🌍 Timezone support
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### �️ Developer Tools
+- 🐍 Pure Python implementation
+- � Modular architecture
+- 🎯 Easy-to-use APIs
+- 📖 Comprehensive examples
+- 🔄 Async/await support
+
+</td>
+<td width="50%">
+
+### 🌐 AI Model Support
+- � OpenAI GPT models
+- 🔀 OpenRouter integration
+- � Multiple model clients
+- 🚀 Streaming responses
+- 💬 Message handling
 
 </td>
 </tr>
@@ -183,16 +208,112 @@ python get_EventFrom_GmailCalendar.py
 
 ```
 autoGen/
-├── 📄 get_EventFrom_GmailCalendar.py    # Main calendar integration
-├── 📄 create_calendar_event_example.py  # Usage examples
-├── 📄 openRouteraiAssistant.py          # OpenRouter AI client
-├── 📄 assistantAgent.py                 # Assistant agent setup
-├── 📓 firstAgent.ipynb                  # Jupyter notebook demo
-├── 📋 requirement.txt                   # Dependencies
-├── 🔐 credentials.json                  # Google OAuth credentials
-├── 🎫 token.json                        # Saved auth token (auto-generated)
-├── 📝 .env                              # Environment variables
-└── 📖 README.md                         # This file
+├── 📄 assistantAgent.py                      # Basic assistant agent setup
+├── 📄 openRouteraiAssistant.py               # OpenRouter AI client configuration
+├── 📄 agentCustomization_PromptEngineering.py # Custom prompt engineering examples
+├── 📄 toolsAgentai.py                        # Agent with tool integration
+├── 📄 messages_in_Autogen.py                 # Message handling examples
+├── 📄 running_ObservingAgent.py              # Event observation and monitoring
+├── 📄 streamingmessage.py                    # Streaming response handling
+├── 📄 image_multimodel_Autogen.py            # Multi-modal (text + image) support
+├── 📄 get_EventFrom_GmailCalendar.py         # Google Calendar integration
+├── 📄 create_calendar_event_example.py       # Calendar usage examples
+├── 📓 firstAgent.ipynb                       # Jupyter notebook demo
+├── 📋 requirement.txt                        # Project dependencies
+├── 🔐 credentials.json                       # Google OAuth credentials
+├── 🎫 token.json                             # Saved auth token (auto-generated)
+├── 📝 .env                                   # Environment variables
+└── 📖 README.md                              # This file
+```
+
+---
+
+## 📚 Project Files Explained
+
+### 🔧 Core Agent Files
+
+#### `assistantAgent.py`
+Basic assistant agent implementation with OpenAI integration.
+
+```python
+python assistantAgent.py
+```
+
+#### `openRouteraiAssistant.py`
+Alternative AI client using OpenRouter for model flexibility.
+
+```python
+python openRouteraiAssistant.py
+```
+
+#### `agentCustomization_PromptEngineering.py`
+Examples of customizing agents with prompt engineering techniques.
+
+```python
+python agentCustomization_PromptEngineering.py
+```
+
+### 🛠️ Advanced Features
+
+#### `toolsAgentai.py`
+Demonstrates how to equip agents with custom tools (e.g., weather lookup).
+
+```python
+python toolsAgentai.py
+```
+
+#### `messages_in_Autogen.py`
+Shows how to work with different message types (TextMessage, MultiModalMessage).
+
+```python
+python messages_in_Autogen.py
+```
+
+#### `running_ObservingAgent.py`
+Monitor agent execution with event observation and inner message inspection.
+
+```python
+python running_ObservingAgent.py
+```
+
+**Key Features:**
+- View `ToolCallRequestEvent` - when agent calls a tool
+- View `ToolCallExecutionEvent` - tool execution results
+- Access `inner_messages` and `chat_message`
+
+#### `streamingmessage.py`
+Real-time streaming responses from AI agents.
+
+```python
+python streamingmessage.py
+```
+
+#### `image_multimodel_Autogen.py`
+Multi-modal AI agent that can process both text and images.
+
+```python
+python image_multimodel_Autogen.py
+```
+
+### 📅 Calendar Integration
+
+#### `get_EventFrom_GmailCalendar.py`
+Full Google Calendar integration with AI assistant.
+
+**Features:**
+- Create events with natural language
+- Fetch today's events
+- OAuth 2.0 authentication
+
+```python
+python get_EventFrom_GmailCalendar.py
+```
+
+#### `create_calendar_event_example.py`
+Standalone examples for creating calendar events programmatically.
+
+```python
+python create_calendar_event_example.py
 ```
 
 ---
