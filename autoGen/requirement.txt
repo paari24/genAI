@@ -3,3 +3,4 @@ autogen-ext[openai]
 python-dotenv
 asyncio
 google-auth-oauthlib google-api-python-client
+PIL
