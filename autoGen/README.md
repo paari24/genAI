@@ -463,7 +463,9 @@ print(response.chat_message)
 
 ## 📊 API Reference
 
-### `create_Event_in_GmailCalendar()`
+### Google Calendar Functions
+
+#### `create_Event_in_GmailCalendar()`
 
 Creates a new event in Google Calendar.
 
@@ -476,13 +478,77 @@ Creates a new event in Google Calendar.
 
 **Returns:** Confirmation message with event link
 
+**Example:**
+```python
+result = create_Event_in_GmailCalendar(
+    summary="Team Meeting",
+    start_datetime="2025-10-16T14:00:00",
+    end_datetime="2025-10-16T15:00:00",
+    description="Quarterly review",
+    location="Zoom"
+)
+```
+
 ---
 
-### `get_today_Events_from_GmailCalendar()`
+#### `get_today_Events_from_GmailCalendar()`
 
 Fetches all events for the current day.
 
 **Returns:** Formatted string with today's events
+
+**Example:**
+```python
+events = get_today_Events_from_GmailCalendar()
+print(events)
+# Output: 📅 Today's Events (2025-10-15): ...
+```
+
+---
+
+### Agent Message Types
+
+#### `TextMessage`
+Simple text-based messages.
+
+```python
+TextMessage(content="Hello", source="user", role="user")
+```
+
+#### `MultiModalMessage`
+Messages with multiple content types (text, images).
+
+```python
+MultiModalMessage(
+    content=["Describe this image", Image(url="...")],
+    source="user"
+)
+```
+
+---
+
+### Response Objects
+
+#### `response.messages`
+List of all messages in the conversation.
+
+#### `response.inner_messages`
+Internal events and tool calls.
+
+#### `response.chat_message`
+Final formatted response message.
+
+---
+
+## 🎓 Learning Path
+
+Start your journey with AutoGen agents:
+
+1. **Beginner**: Start with `assistantAgent.py` - Basic agent setup
+2. **Intermediate**: Try `toolsAgentai.py` - Add custom tools
+3. **Advanced**: Explore `running_ObservingAgent.py` - Event monitoring
+4. **Expert**: Build with `image_multimodel_Autogen.py` - Multi-modal AI
+5. **Integration**: Master `get_EventFrom_GmailCalendar.py` - Real-world API integration
 
 ---
 
@@ -498,7 +564,32 @@ Contributions are welcome! Feel free to:
 
 ---
 
-## 📝 License
+## � Quick Command Reference
+
+```bash
+# Setup
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirement.txt
+
+# Run Examples
+python assistantAgent.py                      # Basic assistant
+python openRouteraiAssistant.py               # OpenRouter client
+python toolsAgentai.py                        # Agent with tools
+python messages_in_Autogen.py                 # Message handling
+python running_ObservingAgent.py              # Event observation
+python streamingmessage.py                    # Streaming responses
+python image_multimodel_Autogen.py            # Multi-modal AI
+python get_EventFrom_GmailCalendar.py         # Calendar integration
+python create_calendar_event_example.py       # Calendar examples
+
+# Jupyter Notebook
+jupyter notebook firstAgent.ipynb
+```
+
+---
+
+## �📝 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
@@ -527,6 +618,14 @@ This project is open source and available under the [MIT License](LICENSE).
 
 Made with ❤️ and 🤖 by [Paari](https://github.com/paari24)
 
-[⬆ Back to Top](#-autogen-google-calendar-assistant)
+---
+
+### 📊 Repository Stats
+
+![GitHub last commit](https://img.shields.io/github/last-commit/paari24/genAI)
+![GitHub repo size](https://img.shields.io/github/repo-size/paari24/genAI)
+![GitHub stars](https://img.shields.io/github/stars/paari24/genAI?style=social)
+
+[⬆ Back to Top](#-autogen-ai-agent-framework)
 
 </div>
