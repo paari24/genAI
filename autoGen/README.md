@@ -171,35 +171,94 @@ print(result)
 
 ## 📋 Examples
 
-### 📅 Fetch Today's Events
+### 🤖 Basic Assistant
 
 ```python
-from get_EventFrom_GmailCalendar import get_today_Events_from_GmailCalendar
+# assistantAgent.py
+from autogen_agentchat.agents import AssistantAgent
+from autogen_ext.models.openai import OpenAIChatCompletionClient
 
+model_client = OpenAIChatCompletionClient(api_key=api_key, model="gpt-4o-mini")
+assistant = AssistantAgent(name="my_Assistant", model_client=model_client)
+
+response = await assistant.run(task="How are you?")
+print(response.messages[-1].content)
+```
+
+### 🛠️ Agent with Tools
+
+```python
+# toolsAgentai.py
+def get_weather(city: str) -> str:
+    return f"The weather in {city} is sunny with 25°C."
+
+assistant = AssistantAgent(
+    name="my_Assistant",
+    model_client=model_client,
+    tools={get_weather}  # Add custom tools
+)
+
+response = await assistant.run(task="Get weather for Chennai")
+```
+
+### 📊 Observing Agent Events
+
+```python
+# running_ObservingAgent.py
+response = await assistant.on_messages(
+    messages=[TextMessage(role="user", content="Get weather", source="user")],
+    cancellation_token=CancellationToken()
+)
+
+print("Inner Messages:", response.inner_messages)
+print("Chat Message:", response.chat_message)
+```
+
+### 🌊 Streaming Responses
+
+```python
+# streamingmessage.py
+async for message in assistant.on_messages_stream(
+    messages=[TextMessage(content="Tell me a story", source="user")]
+):
+    print(message, end="", flush=True)
+```
+
+### 🖼️ Multi-Modal (Text + Images)
+
+```python
+# image_multimodel_Autogen.py
+from autogen_agentchat.messages import MultiModalMessage
+
+message = MultiModalMessage(
+    content=["What's in this image?", Image(image_url)],
+    source="user"
+)
+response = await assistant.run(task=message)
+```
+
+### 📅 Calendar Events
+
+```python
+# get_EventFrom_GmailCalendar.py
+# Fetch today's events
 events = get_today_Events_from_GmailCalendar()
 print(events)
-```
 
-**Output:**
-```
-📅 Today's Events (2025-10-15):
+# Create an event
+from datetime import datetime, timedelta
 
-1. Daily Standup - 09:00 AM @ Zoom
-2. Project Review - 02:30 PM @ Conference Room A
-3. Team Dinner - 07:00 PM @ Downtown Bistro
-```
+tomorrow = datetime.now() + timedelta(days=1)
+start = tomorrow.replace(hour=14, minute=0)
+end = tomorrow.replace(hour=15, minute=0)
 
-### ✨ Create Multiple Events
-
-```python
-# See create_calendar_event_example.py for full examples
-python create_calendar_event_example.py
-```
-
-### 🤖 Run AI Assistant
-
-```python
-python get_EventFrom_GmailCalendar.py
+result = create_Event_in_GmailCalendar(
+    summary="Team Meeting",
+    start_datetime=start.isoformat(),
+    end_datetime=end.isoformat(),
+    description="Quarterly review",
+    location="Conference Room A"
+)
 ```
 
 ---
