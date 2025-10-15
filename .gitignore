@@ -1,3 +1,6 @@
 .env
 sessionNotes/chroma_db/*
 sessionNotes/My_First_Vectordb/*
+autoGen/credentials.json
+autoGen/token.json
+autoGen/__pycache__/get_EventFrom_GmailCalendar.cpython-313.pyc
