@@ -414,18 +414,50 @@ Ask the AI assistant to manage your calendar using plain English:
 
 ## 🐛 Troubleshooting
 
-### Error: `redirect_uri_mismatch`
+### Common Issues and Solutions
+
+#### Error: `redirect_uri_mismatch`
 **Solution:** Add `http://localhost:8080/` to authorized redirect URIs in Google Cloud Console
 
-### Error: `ModuleNotFoundError: No module named 'autogen_agentchat'`
+#### Error: `ModuleNotFoundError: No module named 'autogen_agentchat'`
 **Solution:** Activate virtual environment and install dependencies:
 ```bash
 .\venv\Scripts\Activate.ps1
 pip install -r requirement.txt
 ```
 
-### Error: `Missing required field 'structured_output'`
-**Solution:** This is a warning (not an error). Already fixed in `openRouteraiAssistant.py`
+#### Error: `Missing required field 'structured_output'` in ModelInfo
+**Solution:** Already fixed in `openRouteraiAssistant.py`. Add `structured_output: False` to model_info dict.
+
+#### Error: `Field required [type=missing]` for TextMessage source
+**Solution:** TextMessage requires a `source` parameter:
+```python
+# ❌ Wrong
+TextMessage(content="Hello")
+
+# ✅ Correct
+TextMessage(content="Hello", source="user")
+```
+
+#### Error: `'Response' object has no attribute 'chat_messages'`
+**Solution:** Use `chat_message` (singular) instead of `chat_messages` (plural):
+```python
+# ❌ Wrong
+print(response.chat_messages)
+
+# ✅ Correct
+print(response.chat_message)
+```
+
+#### Virtual Environment Not Activated
+**Solution:** Always activate before running scripts:
+```bash
+# Windows PowerShell
+.\venv\Scripts\Activate.ps1
+
+# Windows CMD
+.\venv\Scripts\activate.bat
+```
 
 ---
 
